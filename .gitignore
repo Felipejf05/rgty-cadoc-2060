@@ -1,8 +1,117 @@
 # Compiled class file
+# ====== Sistema Operacional ======
+# Windows thumbnail cache files
+Thumbs.db
+ehthumbs.db
+
+# Windows image file caches
+[Dd]esktop.ini
+
+# Mac system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux Trash folder
+.Trash-*
+
+# ====== IntelliJ IDEA ======
+# User-specific stuff
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+.idea/**/aws.xml
+
+# Sensitive or high-churn files
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+
+# Gradle and Maven auto-import files
+.idea/**/gradle.xml
+.idea/**/libraries
+
+# Mongo Explorer plugin
+.idea/**/mongoSettings.xml
+
+# Sonarlint plugin files
+.idea/**/sonarlint/
+.idea/**/sonarIssues.xml
+
+# Markdown Navigator plugin files
+.idea/**/markdown-navigator.xml
+.idea/**/markdown-navigator-enh.xml
+.idea/**/markdown-navigator/
+
+# IntelliJ caches
+.idea/$CACHE_FILE$
+.idea/codestream.xml
+.idea/**/azureSettings.xml
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Cursive Clojure plugin
+.idea/replstate.xml
+
+# Crashlytics plugin files
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+# Editor-based Rest Client files
+.idea/httpRequests
+
+# Android Studio serialized cache files
+.idea/caches/build_file_checksums.ser
+
+# File-based project format
+*.iws
+
+# *.iml module files (uncomment if you don't want to track these)
+# *.iml
+# modules.xml
+# .idea/misc.xml
+# *.ipr
+
+# ====== Maven ======
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+
+# ====== Gradle ======
+.gradle/
+build/
+
+# ====== Logs ======
+*.log
+
+# ====== Others ======
+# Temporary files
+*.tmp
+*.temp
+
+# Compiled class files
 *.class
 
 # Log file
-*.log
 
 # BlueJ files
 *.ctxt
@@ -11,6 +120,7 @@
 .mtj.tmp/
 
 # Package Files #
+# Package Files
 *.jar
 *.war
 *.nar
@@ -22,3 +132,33 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+# Generated files
+out/
+
+# Coverage Reports
+coverage/
+
+# Eclipse files
+.classpath
+.project
+.settings/
+
+# NetBeans files
+.nb-gradle/
+
+# VS Code files
+.vscode/
+
+# JetBrains Rider
+.idea/
+
+# Docker files (if any)
+docker-compose.override.yml
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Local history
+.localhistory/
