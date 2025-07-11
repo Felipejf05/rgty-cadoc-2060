@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CadocRepository extends JpaRepository<CadocFile, Long> {
+public interface CadocFileRepository extends JpaRepository<CadocFile, Long> {
 }
