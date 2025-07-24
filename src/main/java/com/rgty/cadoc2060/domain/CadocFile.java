@@ -7,15 +7,19 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "cadoc2060")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -25,19 +29,19 @@ public class CadocFile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "accounting_item", length = 10, nullable = false)
-    private String accountingItem;
+    @Column(nullable = false, unique = true)
+    private String name;
 
-    @Column(name = "risk_factor", length = 10, nullable = false)
-    private String riskFactor;
+    @Column(name = "status_id", nullable = false)
+    private Long statusId;
 
-    @Column(nullable = false)
-    private Integer vertex;
+    @Column(name = "retry_count", nullable = false)
+    private int retryCount;
 
-    @Column(name = "activity_code", length = 10, nullable = false)
-    private String activityCode;
+    @Column(name = "input_time", nullable = false)
+    private LocalDateTime inputTime;
 
-    @Column(name = "institution_cnpj", length = 14, nullable = false)
-    private String institutionCnpj;
+    @Column(name = "file_size", nullable = false)
+    private Long fileSize;
 
 }

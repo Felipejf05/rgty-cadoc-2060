@@ -24,6 +24,12 @@ spring:
         format_sql: true
         use_sql_comments: true
 
+  cloud:
+    aws:
+      bucket:
+        region: ${FINTECH001_CADOC_2060_S3_STORAGE_REGION}
+        bucketName: ${FINTECH001_CADOC_2060_S3_STORAGE_NAME}
+
 springdoc:
   api-docs:
     path: /api-docs
@@ -38,3 +44,5 @@ logging:
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql: TRACE
 
+cadoc2060:
+  upload-dir: inbox
