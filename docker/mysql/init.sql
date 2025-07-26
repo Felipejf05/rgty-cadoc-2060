@@ -1,0 +1,12 @@
+CREATE DATABASE IF NOT EXISTS cadoc2060_db;
+USE cadoc2060_db;
+
+CREATE TABLE IF NOT EXISTS cadoc_status (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  nemotecnico VARCHAR(255) NOT NULL
+);
+
+INSERT INTO cadoc_status (nemotecnico) VALUES ('CADOC2060_RECEIVED');
+INSERT INTO cadoc_status (nemotecnico) VALUES ('CADOC2060_FILE_SPLIT');
+INSERT INTO cadoc_status (nemotecnico) VALUES ('CADOC2060_UPLOAD_ERROR');
+INSERT INTO cadoc_status (nemotecnico) VALUES ('CADOC2060_VALIDATION_ERROR');

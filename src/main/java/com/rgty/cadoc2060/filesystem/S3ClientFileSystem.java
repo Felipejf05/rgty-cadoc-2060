@@ -1,10 +1,13 @@
 package com.rgty.cadoc2060.filesystem;
 
+import com.rgty.cadoc2060.common.helper.LogGenerator;
+import com.rgty.cadoc2060.config.AwsProperties;
 import com.rgty.cadoc2060.domain.CadocCompany;
 import com.rgty.cadoc2060.domain.CadocFile;
 import com.rgty.cadoc2060.exception.FileReadingException;
 import com.rgty.cadoc2060.exception.FileValidationException;
 import com.rgty.cadoc2060.exception.InternalServerException;
+import com.rgty.cadoc2060.validator.PatternValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,6 +29,9 @@ import java.util.List;
 public final class S3ClientFileSystem implements BucketClient {
 public static final String ERRO_AO_LER_ARQUIVO = "Erro ao ler arquivo";
 private final S3Client awsClient;
+private final AwsProperties awsProperties;
+private final LogGenerator logGenerator;
+private final PatternValidator patternValidator;
 
     @Value("${cadoc2060.upload-dir}")
     private String uploadDir;

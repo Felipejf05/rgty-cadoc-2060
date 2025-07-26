@@ -4,7 +4,6 @@ import com.rgty.cadoc2060.common.helper.LogGenerator;
 import com.rgty.cadoc2060.common.singleton.CadocStatusSingleton;
 import com.rgty.cadoc2060.domain.CadocFile;
 import com.rgty.cadoc2060.exception.FileValidationException;
-import com.rgty.cadoc2060.filesystem.S3ClientFileSystem;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,7 +28,7 @@ public class FileActionsService {
 
     private final LogGenerator logGenerator;
     private final CadocFileService cadocFileService;
-    private final S3ClientFileSystem s3ClientFileSystem;
+//    private final S3ClientFileSystem s3ClientFileSystem;
     private final CadocStatusSingleton cadocStatusSingleton;
     private final ValidateFileNameUseCase validateFileNameUseCase;
 
@@ -55,7 +54,7 @@ public class FileActionsService {
             throw new FileValidationException(FILE_ALREADY_EXISTS);
         }
 
-        s3ClientFileSystem.uploadFileFromRequest(file);
+//        s3ClientFileSystem.uploadFileFromRequest(file);
         final var cadocFile = persistFileInformation(file);
 
         log.info(logGenerator.logMsg(fileName, "Arquivo enviado"));

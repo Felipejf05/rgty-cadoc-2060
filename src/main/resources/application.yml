@@ -37,6 +37,7 @@ springdoc:
     disable-swagger-default-url: true
     path: /swagger.ui.html
 
+
 logging:
   level:
     root: INFO
