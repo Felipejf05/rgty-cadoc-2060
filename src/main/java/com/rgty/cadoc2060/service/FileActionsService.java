@@ -4,6 +4,7 @@ import com.rgty.cadoc2060.common.helper.LogGenerator;
 import com.rgty.cadoc2060.common.singleton.CadocStatusSingleton;
 import com.rgty.cadoc2060.domain.CadocFile;
 import com.rgty.cadoc2060.exception.FileValidationException;
+import com.rgty.cadoc2060.filesystem.S3ClientFileSystem;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,11 +12,6 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 
 import static com.rgty.cadoc2060.common.helper.Messages.FILE_ALREADY_EXISTS;
@@ -28,12 +24,9 @@ public class FileActionsService {
 
     private final LogGenerator logGenerator;
     private final CadocFileService cadocFileService;
-//    private final S3ClientFileSystem s3ClientFileSystem;
+    private final S3ClientFileSystem s3ClientFileSystem;
     private final CadocStatusSingleton cadocStatusSingleton;
     private final ValidateFileNameUseCase validateFileNameUseCase;
-
-    @Value("${cadoc2060.upload-dir}")
-    private String uploadDir;
 
     public CadocFile uploadFileFromRequest(final MultipartFile file) {
         log.info(logGenerator.logMsg(file.getName(), "Iniciando o upload do arquivo..."));
@@ -54,7 +47,7 @@ public class FileActionsService {
             throw new FileValidationException(FILE_ALREADY_EXISTS);
         }
 
-//        s3ClientFileSystem.uploadFileFromRequest(file);
+        s3ClientFileSystem.uploadFileFromRequest(file);
         final var cadocFile = persistFileInformation(file);
 
         log.info(logGenerator.logMsg(fileName, "Arquivo enviado"));
@@ -85,14 +78,11 @@ public class FileActionsService {
 
         log.info(logGenerator.logMsg(fileName, "Iniciando o download do arquivo..."));
 
-        try {
-            Path path = Paths.get(uploadDir, fileName);
-            InputStream inputStream = Files.newInputStream(path);
+        final var file = s3ClientFileSystem.downloadFile(fileName);
 
-            return new InputStreamResource(inputStream);
-        } catch (IOException e) {
-            throw new RuntimeException("Erro ao ler o arquivo local: " + fileName, e);
-        }
+        log.info(logGenerator.logMsg(fileName, "Arquivo obtido na AWS..."));
+
+        return file;
 
     }
 }

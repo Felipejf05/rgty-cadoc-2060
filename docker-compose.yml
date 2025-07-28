@@ -46,6 +46,44 @@ services:
     networks:
       - app-network
 
+  # MinIO (S3 Compatible Storage)
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY}
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY}
+    ports:
+      - "9000:9000"  # MinIO API
+      - "9001:9001"  # MinIO Console UI
+    volumes:
+      - minio_data:/data
+    networks:
+      - app-network
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  # MinIO Client para criar bucket automaticamente
+  minio-setup:
+    image: minio/mc:latest
+    container_name: minio-setup
+    depends_on:
+      minio:
+        condition: service_healthy
+    networks:
+      - app-network
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc alias set myminio http://minio:9000 ${MINIO_ACCESS_KEY} ${MINIO_SECRET_KEY};
+      /usr/bin/mc mb myminio/${MINIO_BUCKET_NAME} --ignore-existing;
+      /usr/bin/mc policy set public myminio/${MINIO_BUCKET_NAME};
+      exit 0;
+      "
+
   api-transaction:
     build: .
     container_name: api-transaction
@@ -68,6 +106,17 @@ services:
       SPRING_JPA_SHOW_SQL: ${JPA_SHOW_SQL}
       SPRING_JPA_DATABASE_PLATFORM: ${JPA_DIALECT}
 
+      # MinIO Environment Variables
+      MINIO_HOST: http://minio:9000
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
+      MINIO_REGION: ${MINIO_REGION}
+      MINIO_BUCKET_NAME: ${MINIO_BUCKET_NAME}
+
+      # AWS S3 (mantendo para compatibilidade)
+      FINTECH001_CADOC_2060_S3_STORAGE_REGION: ${MINIO_REGION}
+      FINTECH001_CADOC_2060_S3_STORAGE_NAME: ${MINIO_BUCKET_NAME}
+
 #      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
 
     restart: on-failure
@@ -76,11 +125,16 @@ services:
 #        condition: service_started
       mysql:
         condition: service_healthy
+      minio:
+        condition: service_healthy
+      minio-setup:
+        condition: service_completed_successfully
     networks:
       - app-network
 
 volumes:
   mysql_data:
+  minio_data:
 
 networks:
   app-network:

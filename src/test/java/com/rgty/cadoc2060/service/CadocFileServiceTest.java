@@ -11,6 +11,7 @@
 //import org.mockito.Mock;
 //import org.mockito.junit.jupiter.MockitoExtension;
 //
+//import java.time.LocalDateTime;
 //import java.util.Arrays;
 //import java.util.Collections;
 //import java.util.List;
@@ -52,7 +53,8 @@
 //
 //        when(cadocFileRepository.save(any(CadocFile.class))).thenReturn(cadocFile1);
 //
-//        CadocFile result = cadocFileService.addFile(cadocFile1);
+//        CadocFile result = cadocFileService.addFile(final String fileName, final Long statusId, final int retryCount,
+//        final LocalDateTime inputTime,final Long fileSize);
 //
 //        assertThat(result).isNotNull();
 //        assertThat(result.getId()).isEqualTo(1L);

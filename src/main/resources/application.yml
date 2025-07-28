@@ -45,5 +45,10 @@ logging:
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql: TRACE
 
-cadoc2060:
-  upload-dir: inbox
+minio:
+  bucket:
+    host: ${MINIO_HOST:http://localhost:9000}
+    accessKey: ${MINIO_ACCESS_KEY:minioadmin}
+    secretKey: ${MINIO_SECRET_KEY:minioadmin}
+    region: ${MINIO_REGION:us-east-1}
+    bucketName: ${MINIO_BUCKET_NAME:fintech001-regulatory}
