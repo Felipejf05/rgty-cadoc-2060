@@ -9,7 +9,6 @@ import com.rgty.cadoc2060.exception.InternalServerException;
 import com.rgty.cadoc2060.validator.PatternValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -45,8 +44,6 @@ public final class S3ClientFileSystem implements BucketClient {
     private final LogGenerator logGenerator;
     private final PatternValidator patternValidator;
 
-    @Value("${cadoc2060.upload-dir}")
-    private String uploadDir;
 
     @Override
     public void uploadFileFromRequest(MultipartFile multipartFile) {

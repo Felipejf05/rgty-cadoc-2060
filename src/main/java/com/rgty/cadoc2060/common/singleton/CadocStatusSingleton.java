@@ -30,9 +30,6 @@ public class CadocStatusSingleton {
     @Getter
     private CadocStatus validationError;
 
-    //    @Getter
-//    private CadocStatus copiedToSmb;
-
     @Getter
     private CadocStatus fileSplit;
 
