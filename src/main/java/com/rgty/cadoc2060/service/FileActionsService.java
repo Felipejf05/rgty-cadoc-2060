@@ -4,10 +4,9 @@ import com.rgty.cadoc2060.common.helper.LogGenerator;
 import com.rgty.cadoc2060.common.singleton.CadocStatusSingleton;
 import com.rgty.cadoc2060.domain.CadocFile;
 import com.rgty.cadoc2060.exception.FileValidationException;
-import com.rgty.cadoc2060.filesystem.S3ClientFileSystem;
+import com.rgty.cadoc2060.filesystem.BucketClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,7 +23,7 @@ public class FileActionsService {
 
     private final LogGenerator logGenerator;
     private final CadocFileService cadocFileService;
-    private final S3ClientFileSystem s3ClientFileSystem;
+    private final BucketClient s3ClientFileSystem;
     private final CadocStatusSingleton cadocStatusSingleton;
     private final ValidateFileNameUseCase validateFileNameUseCase;
 
@@ -84,5 +83,9 @@ public class FileActionsService {
 
         return file;
 
+    }
+
+    public boolean checkIfFileExists(final String name){
+        return cadocFileService.existsFile(name);
     }
 }
