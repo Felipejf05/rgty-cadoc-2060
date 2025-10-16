@@ -23,6 +23,10 @@ spring:
         dialect: ${JPA_DIALECT:org.hibernate.dialect.MySQL8Dialect}
         format_sql: true
         use_sql_comments: true
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
 
   cloud:
     aws:
@@ -47,7 +51,7 @@ logging:
 
 minio:
   bucket:
-    host: ${MINIO_HOST:http://localhost:9000}
+    host: ${MINIO_HOST:http://minio:9000}
     accessKey: ${MINIO_ACCESS_KEY:minioadmin}
     secretKey: ${MINIO_SECRET_KEY:minioadmin}
     region: ${MINIO_REGION:us-east-1}

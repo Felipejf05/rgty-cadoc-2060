@@ -6,7 +6,14 @@ CREATE TABLE IF NOT EXISTS cadoc_status (
   nemotecnico VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS cadoc_company (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  company_name VARCHAR(255) NOT NULL UNIQUE
+);
+
 INSERT INTO cadoc_status (nemotecnico) VALUES ('CADOC2060_RECEIVED');
 INSERT INTO cadoc_status (nemotecnico) VALUES ('CADOC2060_FILE_SPLIT');
 INSERT INTO cadoc_status (nemotecnico) VALUES ('CADOC2060_UPLOAD_ERROR');
 INSERT INTO cadoc_status (nemotecnico) VALUES ('CADOC2060_VALIDATION_ERROR');
+
+INSERT INTO cadoc_company (company_name) VALUES ('FINTECH001');
