@@ -61,9 +61,9 @@ services:
       exit 0;
       "
 
-  api-transaction:
+  api-cadoc2060:
     build: .
-    container_name: api-transaction
+    container_name: api-cadoc2060
     ports:
       - "8080:8080"
     environment:
